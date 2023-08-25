@@ -5,6 +5,7 @@ plugins {
 
 val checkStyleVersion by extra("10.12.2")
 val googleCheckStylePath by extra("config/checkstyle/google_checks.xml")
+val mainClassPath by extra("org.example.Main")
 
 group = "org.example"
 version = "1.0-SNAPSHOT"
@@ -15,7 +16,7 @@ version = "1.0-SNAPSHOT"
  **/
 tasks.jar {
     manifest {
-        attributes["Main-Class"] = "org.example.Main"
+        attributes["Main-Class"] = mainClassPath
     }
     from(sourceSets.main.get().output)
 }
