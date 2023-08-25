@@ -1,6 +1,7 @@
 plugins {
     id("java")
     checkstyle
+    application
 }
 
 val checkStyleVersion by extra("10.12.2")
@@ -11,7 +12,8 @@ group = "org.example"
 version = "1.0-SNAPSHOT"
 
 /**
- *  To create jar file. Location will be build/libs/jar_file.jar
+ *  Assembles a jar archive containing the classes of the 'main' feature.
+ *  Location will be build/libs/jar_file.jar
  *
  **/
 tasks.jar {
@@ -20,6 +22,17 @@ tasks.jar {
     }
     from(sourceSets.main.get().output)
 }
+
+
+/**
+ *  Define run task for gradle.
+ *  Runs this project as a JVM application
+ *
+ **/
+application {
+    mainClass = mainClassPath
+}
+
 
 checkstyle {
     toolVersion = checkStyleVersion
