@@ -3,14 +3,27 @@ plugins {
     checkstyle
 }
 
+val checkStyleVersion by extra("10.12.2")
+val googleCheckStylePath by extra("config/checkstyle/google_checks.xml")
+
 group = "org.example"
 version = "1.0-SNAPSHOT"
 
-checkstyle {
-    toolVersion = "10.12.2"
-    configFile = file("config/checkstyle/google_checks.xml")
-    isIgnoreFailures = true
+/**
+ *  To create jar file. Location will be build/libs/jar_file.jar
+ *
+ **/
+tasks.jar {
+    manifest {
+        attributes["Main-Class"] = "org.example.Main"
+    }
+    from(sourceSets.main.get().output)
+}
 
+checkstyle {
+    toolVersion = checkStyleVersion
+    configFile = file(googleCheckStylePath)
+    isIgnoreFailures = false
 }
 
 repositories {
